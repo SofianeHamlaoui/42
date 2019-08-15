@@ -1,0 +1,6 @@
+Credentials cache: API:61895
+        Principal: shamlaou@LE-101.FR
+
+		  Issued                Expires               Principal
+		  Jul 29 13:14:38 2019  Jul 29 23:14:38 2019  krbtgt/LE-101.FR@LE-101.FR
+		  Jul 29 13:14:39 2019  Jul 29 23:14:38 2019  ldap/ldap-master.le-101.fr@LE-101.FR
