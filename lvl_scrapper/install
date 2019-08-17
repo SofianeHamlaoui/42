@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if command -v brew &>/dev/null ;
+then
+    echo -e '\033[32mbrew is installed\033[0m'
+    if command npm -v &>/dev/null ;
+    then
+        echo -e '\033[32mnode is installed\033[0m'
+    else
+        echo -e '\033[33mnode is not installed\033[0m'
+        brew install node
+        echo -e '\033[32mThe environment is ready, to launch the script : "npm install", then "npm start"\033[0m'
+    fi
+else
+    echo -e '\033[33mbrew is not installed\033[0m'
+    curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
+    echo -e "\033[32mPlease close your terminal and relaunch './install[0m'"
+fi
