@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strjoin.c                                     .::    .:/ .      .::   */
+/*   ft_strjoin2.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shamlaou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/14 13:31:23 by shamlaou     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/19 16:07:12 by shamlaou    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/20 23:30:08 by shamlaou     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/20 23:53:08 by shamlaou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,10 +23,26 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strcat(char *dest, char *src)
+int		ft_lngh(char **strs, int size, char *sep)
 {
 	int i;
-	int j;
+	int lng;
+
+	i = 0;
+	lng = 0;
+	while (i < size)
+	{
+		lng = lng + ft_strlen(strs[i]);
+		i++;
+	}
+	lng = lng + (size - 1) * ft_strlen(sep) + 1;
+	return (lng);
+}
+
+char	*ft_strcat(char *dest, char *src)
+{
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -37,35 +53,31 @@ char	*ft_strcat(char *dest, char *src)
 		dest[i + j] = src[j];
 		j++;
 	}
-	dest[i + j] = '\0';
+	dest[i + j] = 0;
 	return (dest);
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
-	char	*dest;
-	int		len_str;
 	int		i;
+	char	*str;
 
-	len_str = 0;
-	i = -1;
-	while (++i < size)
-		len_str = len_str + ft_strlen(strs[i]);
-	len_str = len_str + ft_strlen(sep) * (size - 1);
-	if (!(dest = malloc(sizeof(char) * (len_str + 1))))
-		return (NULL);
-	*dest = 0;
-	i = -1;
-	while (++i < size)
-	{
-		ft_strcat(dest, strs[i]);
-		if (!(i == size - 1))
-			ft_strcat(dest, sep);
-	}
 	if (size == 0)
 	{
-		dest = NULL;
-		return (dest);
+		str = malloc(sizeof(char));
+		*str = 0;
+		return (str);
 	}
-	return (dest);
+	if (!(str = malloc(sizeof(char) * ft_lngh(strs, size, sep))))
+		return (NULL);
+	*str = 0;
+	i = 0;
+	while (i < size)
+	{
+		ft_strcat(str, strs[i]);
+		if (i < size - 1)
+			ft_strcat(str, sep);
+		i++;
+	}
+	return (str);
 }
